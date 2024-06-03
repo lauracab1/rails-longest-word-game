@@ -10,16 +10,9 @@ class GamesController < ApplicationController
     @score = 0
     @letters = params[:letters]
     @word = params[:word]
-
-    if in_the_grid?(@letters, @word)
-      @response = "it's not in the grid"
-    else
-      @response = "it's ok"
-    end
-
-    if english_word?(@word)
-      @score += 1
-    end
+    @in_the_grid = in_the_grid?(@letters, @word)
+    @response = @in_the_grid ? "it's not in the grid" : "it's ok"
+    @score += 1 if (@in_the_grid == false) && english_word?(@word)
   end
 
   private
@@ -27,9 +20,9 @@ class GamesController < ApplicationController
   def in_the_grid?(letters, word)
     word = word.upcase.split('')
     result = []
-      word.each do |letter|
-        result << letters.include?(letter)
-      end
+    word.each do |letter|
+      result << letters.include?(letter)
+    end
     result.include?(false)
   end
 
