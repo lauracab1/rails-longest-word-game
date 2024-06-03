@@ -11,7 +11,13 @@ class GamesController < ApplicationController
     @letters = params[:letters]
     @word = params[:word]
     @in_the_grid = in_the_grid?(@letters, @word)
-    @response = @in_the_grid ? "it's not ok" : "it's ok"
+    @response = if in_the_grid?(@letters, @word)
+                  "Sorry but #{@word} can't be built out of #{@letters.gsub(' ', ', ')}"
+                elsif english_word?(@word) == false
+                  "Sorry but #{@word} doesn't not seem to be a valid English word"
+                else
+                  "Congratulations! #{@word} is a valid English word!"
+                end
     @score += 1 if (@in_the_grid == false) && english_word?(@word)
   end
 
