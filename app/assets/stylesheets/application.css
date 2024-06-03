@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+  margin: 20px !important;
+}
+
+.letters {
+  margin-top: 16px;
+}
+
+.letters p {
+  padding: 16px 0;
+}
+
+
+span {
+  background-color: #0496FF;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 16px;
+  margin-right: 16px;
+}
