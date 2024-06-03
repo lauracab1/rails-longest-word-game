@@ -11,7 +11,7 @@ class GamesController < ApplicationController
     @letters = params[:letters]
     @word = params[:word]
     @in_the_grid = in_the_grid?(@letters, @word)
-    @response = @in_the_grid ? "it's not in the grid" : "it's ok"
+    @response = @in_the_grid ? "it's not ok" : "it's ok"
     @score += 1 if (@in_the_grid == false) && english_word?(@word)
   end
 
@@ -22,6 +22,7 @@ class GamesController < ApplicationController
     result = []
     word.each do |letter|
       result << letters.include?(letter)
+      result << (word.count(letter) <= letters.count(letter))
     end
     result.include?(false)
   end
